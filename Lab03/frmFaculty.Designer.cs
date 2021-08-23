@@ -149,9 +149,10 @@ namespace Lab03
             // 
             // btnUpdateFaculty
             // 
+            this.btnUpdateFaculty.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateFaculty.Location = new System.Drawing.Point(196, 293);
             this.btnUpdateFaculty.Name = "btnUpdateFaculty";
-            this.btnUpdateFaculty.Size = new System.Drawing.Size(99, 33);
+            this.btnUpdateFaculty.Size = new System.Drawing.Size(120, 35);
             this.btnUpdateFaculty.TabIndex = 2;
             this.btnUpdateFaculty.Text = "Thêm / Sửa";
             this.btnUpdateFaculty.UseVisualStyleBackColor = true;
@@ -159,9 +160,10 @@ namespace Lab03
             // 
             // btnDelFaculty
             // 
+            this.btnDelFaculty.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelFaculty.Location = new System.Drawing.Point(328, 293);
             this.btnDelFaculty.Name = "btnDelFaculty";
-            this.btnDelFaculty.Size = new System.Drawing.Size(86, 33);
+            this.btnDelFaculty.Size = new System.Drawing.Size(86, 35);
             this.btnDelFaculty.TabIndex = 3;
             this.btnDelFaculty.Text = "Xoá";
             this.btnDelFaculty.UseVisualStyleBackColor = true;
@@ -169,9 +171,10 @@ namespace Lab03
             // 
             // btnClose
             // 
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Location = new System.Drawing.Point(876, 332);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(99, 33);
+            this.btnClose.Size = new System.Drawing.Size(99, 35);
             this.btnClose.TabIndex = 4;
             this.btnClose.Text = "Đóng";
             this.btnClose.UseVisualStyleBackColor = true;

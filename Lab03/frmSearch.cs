@@ -35,6 +35,8 @@ namespace Lab03
 
         private void frmSearch_Load(object sender, EventArgs e)
         {
+            txtMaSoSV.Clear();
+            txtHoTen.Clear();
             txtResult.Text = "0";
             cmbKhoa.Text = "";
             dgvSearch.Rows.Clear();
@@ -50,46 +52,83 @@ namespace Lab03
         private void btnSearch_Click(object sender, EventArgs e)
         {
             List<Student> students = contextDB.Students.ToList();
-            
-            if(txtHoTen.Text =="" && txtMaSoSV.Text==""&&cmbKhoa.Text=="")
+            if(txtMaSoSV.Text=="" && txtHoTen.Text =="" && cmbKhoa.Text =="")
             {
-                BindGrid(students);
+                MessageBox.Show("Vui lòng nhập dữ liệu cần tìm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (txtMaSoSV.Text == "" && txtHoTen.Text == "") 
+
+            if (txtMaSoSV.Text != "")
             {
-                List<Student> seacrh = (from s in students where s.Faculty.FacultyName == cmbKhoa.Text select s).ToList();
-                BindGrid(seacrh);
-            }
+                if (txtMaSoSV.TextLength <= 10)
+                {
+                    if (txtHoTen.Text == "" && cmbKhoa.Text == "")
+                    {
+                        List<Student> search = (from s in students where s.StudentID.StartsWith(txtMaSoSV.Text) select s).ToList();
+                        BindGrid(search);
+                    }
+                    else
+                    {
+                        if (txtHoTen.Text != "" && cmbKhoa.Text == "")
+                        {
+                            List<Student> seacrh1 = (from s in students
+                                                     where s.StudentID.StartsWith(txtMaSoSV.Text) && s.FullName.ToLower().Contains(txtHoTen.Text.ToLower())
+                                                     select s).ToList();
+                            BindGrid(seacrh1);
+                        }
+                        else
+                        {
+                            List<Student> seacrh1 = (from s in students 
+                                                     where s.Faculty.FacultyName == cmbKhoa.Text && s.StudentID.StartsWith(txtMaSoSV.Text) 
+                                                     select s).ToList();
+                            BindGrid(seacrh1);
+                        }
+                    }
+                }
+                else
+                    MessageBox.Show("Mã số SV chỉ tối đa 10 kí tự!", "Thông báo", MessageBoxButtons.OK);
+                }
             else
             {
-                if (txtMaSoSV.Text != null && txtHoTen.Text != null)
+                if (txtHoTen.Text == "" && cmbKhoa.Text != "")
                 {
-                    List<Student> search = (from s in students where (s.FullName.Contains(txtHoTen.Text) && s.StudentID == txtMaSoSV.Text && s.Faculty.FacultyName == cmbKhoa.Text) select s).ToList();
-                    BindGrid(search);
+                    List<Student> seacrh1 = (from s in students where s.Faculty.FacultyName == cmbKhoa.Text select s).ToList();
+                    BindGrid(seacrh1);
                 }
                 else
                 {
-
+                    if (txtHoTen.Text != "" && cmbKhoa.Text == "")
+                    {
+                        List<Student> search2 = (from s in students where s.FullName.ToLower().Contains(txtHoTen.Text.ToLower()) select s).ToList();
+                        BindGrid(search2);
+                    }
+                    else
+                    {
+                        List<Student> search3 = (from s in students
+                                                 where s.FullName.ToLower().Contains(txtHoTen.Text.ToLower())
+                                                       && s.Faculty.FacultyName == cmbKhoa.Text
+                                                select s).ToList();
+                        BindGrid(search3);
+                    }
                 }
             }
 
             txtResult.Text = dgvSearch.Rows.Count.ToString();
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+            private void btnBack_Click(object sender, EventArgs e)
+            {
+                this.Close();
+            }
 
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            frmSearch_Load(sender, e);
-        }
+            private void btnXoa_Click(object sender, EventArgs e)
+            {
+                frmSearch_Load(sender, e);
+            }
 
-        private void cmbKhoa_DropDown(object sender, EventArgs e)
-        {
-            List<Faculty> listFacultys = contextDB.Faculties.ToList();
-            FillFacultyCombobox(listFacultys);
+            private void cmbKhoa_DropDown(object sender, EventArgs e)
+            {
+                List<Faculty> listFacultys = contextDB.Faculties.ToList();
+                FillFacultyCombobox(listFacultys);
+            }
         }
     }
-}
